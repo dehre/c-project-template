@@ -30,18 +30,6 @@ My take on setting up a nice environment for developing **C** (no C++) on MacOS.
     To work it around, there's a `Dockerfile` that sets them up on Ubuntu.  
     You may use that docker image to play around with `gcc`, `gdb`, and `Linux` too.
 
-## Aside #1
-
-I didn't mean to publish this project in the first place.  
-It started out as a private C repo (with the simplest Makefile ever) that I used to try out code snippets.  
-Over time I kept adding more and more "features" that helped me writing more robust programs, and now I think this setup can be useful for someone else, too.  
-Being my private repo quite a mess at this point, I restarted fresh with this new public project.
-
-## Aside #2
-
-I'm not proficient with CMake, and I don't want configuration files to become an ugly mess.  
-This is the simplest way I could make the whole thing working, without becoming some kind of CMake wizard.
-
 ## Requirements
 
 - CMake
