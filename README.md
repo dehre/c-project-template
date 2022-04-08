@@ -42,24 +42,26 @@ To install `clang-tidy`, I installed `llvm` with Homebrew first, then added this
 alias clang-tidy='/opt/homebrew/opt/llvm/bin/clang-tidy'
 ```
 
-## How I use it
+## How to use it
+
+(The `build`, `run`, and `test` commands can also be run as VSCode Tasks, see `.vscode/tasks.json`.)
 
 An example is worth a thousand words:
 
 ```sh
 # build in debug mode
-./make.sh debug
+./build.sh debug
 # or just
-./make.sh
+./build.sh
 
 # clean build in debug mode
-./make.sh debug clean
+./build.sh debug clean
 
 # build in release mode, or with ASan, UBSan, or TSan
-./make.sh release
-./make.sh asan
-./make.sh ubsan
-./make.sh tsan
+./build.sh release
+./build.sh asan
+./build.sh ubsan
+./build.sh tsan
 
 # run in debug and release mode, assuming `main` is an executable name in `apps/CMakeLists.txt`
 ./run.sh debug main [<args...>]
@@ -88,7 +90,7 @@ Now valgrind. The Docker daemon should be running already:
 cd project
 
 rm -rf build
-./make.sh
+./build.sh
 valgrind build/debug/apps/main
 strace build/debug/apps/main
 ltrace build/debug/apps/main
@@ -110,10 +112,6 @@ My use cases for this repo:
 
 ## FAQ
 
-### Why is it `make.sh` instead of `build.sh`?
-
-I build the code quite often, and the `build` directory would mess it up if I tried to type `./build.sh` using autocompletion (`./b` + TAB).
-
 ### googletest isn't in C
 
 Indeed, but for most use cases [it's all macros](https://github.com/google/googletest/tree/main/googletest/samples) and doesn't look much different from regular C code.
@@ -125,13 +123,13 @@ Indeed, but for most use cases [it's all macros](https://github.com/google/googl
     Uncomment them in `apps/CMakeLists.txt`, then, as usual:
 
 ```sh
-./make.sh asan
+./build.sh asan
 ./run.sh asan use-after-free
 
-./make.sh ubsan
+./build.sh ubsan
 ./run.sh ubsan signed-int-overflow
 
-./make.sh tsan
+./build.sh tsan
 ./run.sh tsan data-race
 ```
 

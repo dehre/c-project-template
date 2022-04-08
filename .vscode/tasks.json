@@ -4,7 +4,7 @@
         {
             "type": "shell",
             "label": "Build <buildType>",
-            "command": "./make.sh",
+            "command": "./build.sh",
             "args": ["${input:buildType}"],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -18,7 +18,7 @@
         {
             "type": "shell",
             "label": "Re-build <buildType>",
-            "command": "./make.sh",
+            "command": "./build.sh",
             "args": ["${input:buildType}", "clean"],
             "options": {
                 "cwd": "${workspaceFolder}"
