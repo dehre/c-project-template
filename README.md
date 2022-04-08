@@ -135,3 +135,10 @@ Indeed, but for most use cases [it's all macros](https://github.com/google/googl
 
 - A very good list of compiler warnings you may want to add:  
 http://fastcompression.blogspot.com/2019/01/compiler-warnings.html
+
+## TODOS for next time
+
+- check if you can get a `launch.json` that works for both mac and ubuntu on the dev container
+- check if you can get the cmake vscode extension working properly
+    - if so, get rid of `build.sh`, `run.sh`, `test.sh`, and refactor `tasks.json`
+- if all that above works out somehow, get rid of `docker-ubuntu-build.sh` and `docker-ubuntu-run.sh` too
