@@ -3,6 +3,6 @@
 
 typedef int errno_t;
 
-char* get_error(errno_t errnum);
+char *get_error(errno_t errnum);
 
 #endif

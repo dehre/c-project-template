@@ -3,6 +3,6 @@
 
 #include <stdlib.h>
 
-char* strcpy_safe(char* dest, size_t size, char* src);
+char *strcpy_safe(char *dest, size_t size, char *src);
 
 #endif

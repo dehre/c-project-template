@@ -2,12 +2,14 @@
 
 int global;
 
-static void* thread1(void* x) {
+static void *thread1(void *x)
+{
     global = 42;
     return x;
 }
 
-int main() {
+int main()
+{
     pthread_t t;
     pthread_create(&t, NULL, thread1, NULL);
     global = 43;

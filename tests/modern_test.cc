@@ -1,10 +1,12 @@
 #include <gtest/gtest.h>
 
-extern "C" {
+extern "C"
+{
 #include "modern.h"
 }
 
-TEST(Modern, ReverseInPlace) {
+TEST(Modern, ReverseInPlace)
+{
     char str_a[] = "hello";
     EXPECT_STREQ(reverse_in_place(str_a), "olleh");
 
