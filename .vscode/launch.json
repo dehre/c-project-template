@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": true,
+            // TODO LORIS: get this path from CMake extension?
+            "program": "${workspaceFolder}/build/debug/apps/main",
+            "args": ["arg1", "arg2"],
+            "environment": [{ "name": "config", "value": "Debug" }],
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
+            "osx": {
+                "MIMode": "lldb"
+            }
+        }
+    ]
+}
