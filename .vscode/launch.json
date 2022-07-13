@@ -10,8 +10,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": true,
-            // TODO LORIS: get this path from CMake extension?
-            "program": "${workspaceFolder}/build/debug/apps/main",
+            "program": "${command:cmake.launchTargetPath}",
             "args": ["arg1", "arg2"],
             "environment": [{ "name": "config", "value": "Debug" }],
             "linux": {
