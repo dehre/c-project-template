@@ -6,9 +6,8 @@
 #include "modern.h"
 #include "noerr.h"
 
-static char random_text[] =
-    "The scarlet dragonfly is a species of dragonfly in the family "
-    "Libellulidae";
+static char random_text[] = "The scarlet dragonfly is a species of dragonfly in the family "
+                            "Libellulidae";
 
 int main(int argc, char *argv[])
 {
