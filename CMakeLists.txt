@@ -1,13 +1,17 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.21)
 
-# set the project name and version
+# 
+# Set the project name and version
+# 
 project(CoolProject VERSION 1.0)
 
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED True)
 set(CMAKE_C_CLANG_TIDY clang-tidy)
 
-# compiler options
+# 
+# Compiler options
+# 
 add_compile_options(
   -Wall
   -Wextra
@@ -23,18 +27,28 @@ add_compile_options(
   $<$<CONFIG:UBSAN>:-fsanitize=undefined>
   $<$<CONFIG:UBSAN>:-fno-omit-frame-pointer>
   $<$<CONFIG:TSAN>:-fsanitize=thread>)
+
 add_link_options(
   -pthread $<$<CONFIG:ASAN>:-fsanitize=address>
   $<$<CONFIG:UBSAN>:-fsanitize=undefined> $<$<CONFIG:TSAN>:-fsanitize=thread>)
 
-# `#define DEBUG` when not in release mode
+# 
+# Add `DEBUG` symbol when not in release mode
+# 
 add_compile_definitions($<$<NOT:$<CONFIG:RELEASE>>:DEBUG>)
 
-# libraries
+# 
+# Build Libraries
+# 
 add_subdirectory(src)
 
-# executable code
-add_subdirectory(apps)
+# 
+# Build the Executable
+# 
+add_executable(main apps/main.c)
+target_link_libraries(main PUBLIC modern_lib noerr_lib)
 
-# tests
+# 
+# Build Tests
+# 
 add_subdirectory(tests)
