@@ -2,6 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "type": "cmake",
+            "label": "Build",
+            "command": "build",
+            "targets": ["main"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
             "type": "shell",
             "label": "Clean",
             "command": "rm -rf build",
