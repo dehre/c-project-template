@@ -16,7 +16,7 @@ My take on setting up a nice environment for developing **C** (no C++) on MacOS.
 
 - **clang-tidy**
 
-    Great static-analysis tool.  
+    Static-analysis tool that catches a good amount of mistakes at copmile-time.  
     Unfortunately, it doesn't come preinstalled on Mac, but you can [work it around](#requirements).
 
 - **Sanitizers**
@@ -26,12 +26,12 @@ My take on setting up a nice environment for developing **C** (no C++) on MacOS.
     
 - **Remote-Containers**
 
-    Thanks to the [VSCode Remote Containers extension](https://code.visualstudio.com/docs/remote/containers), you can develop the application in a Docker container running Ubuntu `20.4`.
+    Thanks to the [VSCode Remote Containers extension](https://code.visualstudio.com/docs/remote/containers), you can try your application in a Docker container running Ubuntu `20.4`.
 
 - **valgrind, strace, ltrace**
 
     These tools aren't available on Mac, but you can use them inside the Docker container.  
-    You may use that docker image to play around with `gcc` and `gdb` too.
+    You may use that Docker image to play around with `gcc` and `gdb` too.
 
 ## Requirements
 
@@ -55,8 +55,9 @@ Then install these VSCode extensions:
 
 ## How to use it
   
-Follow this tutorial, starting from the ["Select a kit"](https://code.visualstudio.com/docs/cpp/cmake-linux#_select-a-kit) section.
-Everything should work out of the box: building, running, tests, and using the integrated debugger.
+Everything should work out of the box: building, running, tests, and using the integrated debugger.  
+If you're not familiar with the VSCode extension [cmake-tools](https://github.com/microsoft/vscode-cmake-tools),
+this [tutorial](https://code.visualstudio.com/docs/cpp/cmake-linux#_select-a-kit) will help you with the first steps.
 
 If you want to develop using the remote container, open the Command Palette and type `Remote-Containers: Reopen in Container` (the Docker daemon should be running already).  
 Then delete the `build` directory, and build the project again.
@@ -78,27 +79,19 @@ Indeed, but for most use cases [it's all macros](https://github.com/google/googl
 
 ## Others
 
-- You can use these three executable files to try out the runtime analyzers:  
-    `apps/use-after-free.c`, `apps/signed-int-overflow.c`, and `apps/data-race.c`.
-    Uncomment them in `apps/CMakeLists.txt`, then, as usual:
-
-```sh
-./build.sh asan
-./run.sh asan use-after-free
-
-./build.sh ubsan
-./run.sh ubsan signed-int-overflow
-
-./build.sh tsan
-./run.sh tsan data-race
-```
-
 - A very good list of compiler warnings you may want to add:  
 http://fastcompression.blogspot.com/2019/01/compiler-warnings.html
 
-## TODOS for next time
+- Here's a tiny program that you can use to try out the Address Sanitizer.  
+  Copy it into `apps/main.c`, select the `Asan` [variant](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/variants.md), build, and run it.
 
-- check if you can get a `launch.json` that works for both mac and ubuntu on the dev container
-- check if you can get the cmake vscode extension working properly
-    - if so, get rid of `build.sh`, `run.sh`, `test.sh`, and refactor `tasks.json`
-- if all that above works out somehow, get rid of `docker-ubuntu-build.sh` and `docker-ubuntu-run.sh` too
+```c
+#include <stdlib.h>
+
+int main()
+{
+    int *x = malloc(10 * sizeof(int));
+    free(x);
+    return x[5];
+}
+```
