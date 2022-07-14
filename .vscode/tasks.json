@@ -3,71 +3,13 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Build <buildType>",
-            "command": "./build.sh",
-            "args": ["${input:buildType}"],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": ["$gcc"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "type": "shell",
-            "label": "Re-build <buildType>",
-            "command": "./build.sh",
-            "args": ["${input:buildType}", "clean"],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": ["$gcc"],
-            "group": {
-                "kind": "build"
-            }
-        },
-        {
-            "type": "shell",
-            "label": "Run <buildType> <targetName>",
-            "command": "./run.sh",
-            "args": ["${input:buildType}", "${input:runTargetName}"],
+            "label": "Clean",
+            "command": "rm -rf build",
+            "args": [],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": []
-        },
-        {
-            "type": "shell",
-            "label": "Test <buildType> <targetName>",
-            "command": "./test.sh",
-            "args": ["${input:buildType}", "${input:testTargetName}"],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        }
-    ],
-    "inputs": [
-        {
-            "id": "buildType",
-            "description": "CMake build type",
-            "type": "pickString",
-            "options": ["debug", "release", "asan", "ubsan", "tsan"],
-            "default": "debug"
-        },
-        {
-            "id": "runTargetName",
-            "description": "Executable name",
-            "type": "promptString",
-            "default": "main"
-        },
-        {
-            "id": "testTargetName",
-            "description": "Test name",
-            "type": "promptString",
-            "default": ""
         }
     ]
 }
