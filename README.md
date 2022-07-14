@@ -23,92 +23,52 @@ My take on setting up a nice environment for developing **C** (no C++) on MacOS.
 
     Address Sanitizer (ASan), Undefined Behaviour Sanitizer (UBSan), and Thread Sanitizer (TSan) for runtime analysis.  
     [Here](https://github.com/google/sanitizers) and [here](https://developer.apple.com/documentation/xcode/diagnosing-memory-thread-and-crash-issues-early) for more info.
+    
+- **Remote-Containers**
+
+    Thanks to the [VSCode Remote Containers extension](https://code.visualstudio.com/docs/remote/containers), you can develop the application in a Docker container running Ubuntu `20.4`.
 
 - **valgrind, strace, ltrace**
 
-    Those three aren't available on Mac.  
-    To work it around, there's a `Dockerfile` that sets them up on Ubuntu.  
-    You may use that docker image to play around with `gcc`, `gdb`, and `Linux` too.
+    These tools aren't available on Mac, but you can use them inside the Docker container.  
+    You may use that docker image to play around with `gcc` and `gdb` too.
 
 ## Requirements
+
+Install these programs on your machine:
 
 - CMake
 - Docker
 - clang-tidy
 
-To install `clang-tidy`, I installed `llvm` with Homebrew first, then added this alias to my `.bashrc`:
+PS: To install `clang-tidy`, install `llvm` with Homebrew first, then add this alias to the `.bashrc`:
 
 ```sh
 alias clang-tidy='/opt/homebrew/opt/llvm/bin/clang-tidy'
 ```
 
+Then install these VSCode extensions:
+
+- ms-vscode.cpptools
+- ms-vscode.cmake-tools
+- ms-vscode-remote.remote-containers
+
 ## How to use it
+  
+Follow this tutorial, starting from the ["Select a kit"](https://code.visualstudio.com/docs/cpp/cmake-linux#_select-a-kit) section.
+Everything should work out of the box: building, running, tests, and using the integrated debugger.
 
-(The `build`, `run`, and `test` commands can also be run as VSCode Tasks, see `.vscode/tasks.json`.)
+If you want to develop using the remote container, open the Command Palette and type `Remote-Containers: Reopen in Container` (the Docker daemon should be running already).  
+Then delete the `build` directory, and build the project again.
 
-An example is worth a thousand words:
-
-```sh
-# build in debug mode
-./build.sh debug
-# or just
-./build.sh
-
-# clean build in debug mode
-./build.sh debug clean
-
-# build in release mode, or with ASan, UBSan, or TSan
-./build.sh release
-./build.sh asan
-./build.sh ubsan
-./build.sh tsan
-
-# run in debug and release mode, assuming `main` is an executable name in `apps/CMakeLists.txt`
-./run.sh debug main [<args...>]
-./run.sh release main [<args...>]
-
-# run with ASan
-./run.sh asan main [<args...>]
-
-# run test in debug mode, assuming `modern_test` is a test in `tests/CMakeLists.txt`
-./test.sh debug modern_test
-
-# run all tests in release mode
-./test.sh release all
-
-# run the debugger, assuming `main` is an executable name in `apps/CMakeLists.txt`
-lldb build/debug/apps/main
-```
-
-Now valgrind. The Docker daemon should be running already:
+Finally, for strace, ltrace, and valgrind, open the remote container and:
 
 ```sh
-# you need to run it only once, but I'll take a while to build...
-./docker-ubuntu-build.sh
-
-./docker-ubuntu-run.sh
-cd project
-
-rm -rf build
-./build.sh
-valgrind build/debug/apps/main
-strace build/debug/apps/main
-ltrace build/debug/apps/main
-gdb build/debug/apps/main
+valgrind path-to-executable
+strace path-to-executable
+ltrace path-to-executable
+gdb path-to-executable
 ```
-
-My use cases for this repo:
-
-1. Write a tiny snippet of code and check how it behaves.  
-    I'd write everything in `main.c` like there's no tomorrow.  
-    Other source and header files, if needed, would still go in the `apps` directory, with the former added to `apps/CMakeLists.txt`.  
-    I would not create libraries or write tests, but I would make heavier use of the runtime analyzers.
-
-2. Create a small project that aims at some meaningful outcome.  
-    I'd write as much code as possible in one or more libraries, in the `src` directory, and write tests for them.  
-    Public headers would placed in the `include` directory.  
-    The executable file would merely handle user input and call library functions.  
-    Check again this [book](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html) for the project structure.
 
 ## FAQ
 
