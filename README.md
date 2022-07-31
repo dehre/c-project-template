@@ -95,3 +95,9 @@ int main()
     return x[5];
 }
 ```
+
+## TODOs
+
+// TODO LORIS: maybe link the [STC library](https://github.com/tylov/STC), useful for general purpose programs
+
+// TODO LORIS: change the testing library, see the "Testing" section here: [pikestyle](https://github.com/dehre/pikestyle#sparse-notes)
