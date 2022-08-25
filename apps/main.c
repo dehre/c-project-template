@@ -1,10 +1,8 @@
+#include "modern.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "modern.h"
-#include "noerr.h"
 
 static char random_text[] = "The scarlet dragonfly is a species of dragonfly in the family "
                             "Libellulidae";
@@ -24,10 +22,6 @@ int main(int argc, char *argv[])
         printf("%s ", modern_reverseinplace(token));
         token = strtok(NULL, " ");
     }
-    printf("\n\n");
-
-    char *noerr_str = get_error(EACCES);
-    printf("EACCES - %s\n", noerr_str);
-    free(noerr_str);
+    printf("\n");
     return 0;
 }
