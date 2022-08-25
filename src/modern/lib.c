@@ -2,7 +2,7 @@
 
 #include "modern.h"
 
-char *reverse_in_place(char *str)
+char *modern_reverseinplace(char *str)
 {
     size_t len = strlen(str);
     for (size_t i = 0; i < len / 2; i++)

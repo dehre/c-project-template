@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     char *token = strtok(random_text, " ");
     while (token)
     {
-        printf("%s ", reverse_in_place(token));
+        printf("%s ", modern_reverseinplace(token));
         token = strtok(NULL, " ");
     }
     printf("\n\n");
