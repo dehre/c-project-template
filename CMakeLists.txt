@@ -46,7 +46,7 @@ add_subdirectory(src)
 # Build the Executable
 # 
 add_executable(main apps/main.c)
-target_link_libraries(main PUBLIC modern_lib)
+target_link_libraries(main PUBLIC modern)
 
 # 
 # Build Tests

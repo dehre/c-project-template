@@ -11,7 +11,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(modern_test modern_test.cc)
-target_link_libraries(modern_test gtest_main modern_lib)
+target_link_libraries(modern_test gtest_main modern)
 target_include_directories(modern_test PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 include(GoogleTest)
